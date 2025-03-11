@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Adjust the hero background image size */
+.hero {
+    position: relative;
+    height: 80vh; /* Reduce height to 80% of the viewport */
+    overflow: hidden;
+    background: url('https://picsum.photos/1920/700?random=1') no-repeat center center / cover;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Adjust the title text size */
+.hero h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 5em; /* Increased title text size */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    opacity: 0; /* Start invisible */
+    animation: slideIn 1s forwards;
+    animation-delay: 0.5s;
+}
+
+/* Keyframes for text animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Keyframes for hero background fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s;
+}
+
+.gallery-item.focused {
+    z-index: 1;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item:not(.focused) {
+    filter: blur(4px);
+    transition: filter 0.3s;
+}
+
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    }
+}
+
+/* Increase the size of the focus card */
+/* Increase the size of the focus card */
+.focus-card {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    max-width: 95%; /* Further increased max width */
+    max-height: 90%; /* Increased max height */
+    text-align: center;
+    padding: 20px; /* Add padding for a cleaner look */
+}
+
+/* Adjust the image inside the focus card */
+.focus-card img {
+    width: 100%;
+    max-width: 1000px; /* Increased max width of the image */
+    border-radius: 10px;
+    max-height: 700px; /* Increased max height of the image */
+    object-fit: contain; /* Ensure the image fits without being distorted */
+}
+

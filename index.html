@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Image Gallery with Focus Card</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
+            background-color: #f0f0f0;
+            /* Light background for contrast */
+        }
+
+        /* Full hero section styling */
+        .hero {
+            position: relative;
+            height: 50vh;
+            /* Full viewport height */
+            overflow: hidden;
+            background: url('https://picsum.photos/1920/1080?random=1') no-repeat center center / cover;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Text styling */
+        .hero h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            /* Start invisible */
+            animation: slideIn 1s forwards;
+            /* Animation */
+            animation-delay: 0.5s;
+            /* Delay for text */
+        }
+
+        /* Keyframes for text animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* Keyframes for hero background fade-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Gallery styling */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            transition: filter 0.3s;
+            /* Smooth transition for blur */
+        }
+
+        .gallery-item {
+            perspective: 1000px;
+            /* Enable 3D perspective */
+            position: relative;
+            /* For positioning the image */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            /* Rounded corners */
+            transition: transform 0.5s;
+            /* Smooth transition */
+        }
+
+        .gallery-item:hover img {
+            transform: rotateY(10deg) scale(1.1);
+            /* Rotate and scale on hover */
+        }
+
+        /* Focus card styling */
+        .focus-card {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Fixed position for focus card */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            /* Shadow for focus card */
+            z-index: 10;
+            /* Above all other content */
+            width: 40%;
+            /* Increased max width */
+            height: 65%;
+            /* Limit max height */
+            text-align: center;
+            /* Centered content */
+            padding: 20px;
+            overflow: hidden;
+            /* Hide overflow when zooming */
+        }
+
+        .focus-card img {
+            width: 100%;
+            border-radius: 10px;
+            /* Rounded corners */
+            max-height: 100%;
+            /* Limit height */
+            object-fit: cover;
+            /* Cover the container */
+            transition: transform 0.5s ease;
+            /* Smooth transition for zoom */
+        }
+
+        /* Zoom effect on hover */
+        .focus-card img:hover {
+            transform: scale(1.2);
+            /* Zoom image on hover */
+        }
+
+        .focus-card .close-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background: #007BFF;
+            /* Blue background */
+            color: white;
+            /* White text */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .focus-card .close-btn:hover {
+            background: #0056b3;
+            /* Darker blue on hover */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <h1>3D Image Gallery</h1>
+    </div>
+
+    <div class="gallery" id="gallery">
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 1">
+                <img src="https://picsum.photos/300/200?random=1" alt="Random Image 1">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 2">
+                <img src="https://picsum.photos/300/200?random=2" alt="Random Image 2">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 3">
+                <img src="https://picsum.photos/300/200?random=3" alt="Random Image 3">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 4">
+                <img src="https://picsum.photos/300/200?random=4" alt="Random Image 4">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 5">
+                <img src="https://picsum.photos/300/200?random=5" alt="Random Image 5">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 6">
+                <img src="https://picsum.photos/300/200?random=6" alt="Random Image 6">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 7">
+                <img src="https://picsum.photos/300/200?random=7" alt="Random Image 7">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 8">
+                <img src="https://picsum.photos/300/200?random=8" alt="Random Image 8">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 9">
+                <img src="https://picsum.photos/300/200?random=9" alt="Random Image 9">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 10">
+                <img src="https://picsum.photos/300/200?random=10" alt="Random Image 10">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 11">
+                <img src="https://picsum.photos/300/200?random=11" alt="Random Image 11">
+            </div>
+        </a>
+        <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Random Image 12">
+                <img src="https://picsum.photos/300/200?random=12" alt="Random Image 12">
+            </div>
+        </a>
+        <!-- <a href="https://canarytokens.com/traffic/terms/static/etsh3ytwo7r0dt21zumlpi2fj/post.jsp" class="canary-image">
+            <div class="gallery-item" data-title="Canary Token">
+                <img src="https://via.placeholder.com/300x200.png?text=Canary+Token">
+            </div>
+        </a> -->
+    </div>
+
+    <iframe id="hidden-frame" style="display: none;"></iframe>
+    <!-- Focus Card -->
+    <div class="focus-card" id="focusCard">
+        <img src="" alt="Focus Image" id="focusImage">
+        <button class="close-btn" id="closeBtn">Close</button>
+    </div>
+
+    <script>
+        // Get all gallery items
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const focusCard = document.getElementById('focusCard');
+        const focusImage = document.getElementById('focusImage');
+        const closeBtn = document.getElementById('closeBtn');
+        const gallery = document.getElementById('gallery');
+
+        // Add click event listener to each gallery item
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Show the focus card
+                focusImage.src = item.querySelector('img').src; // Get image src
+                focusCard.style.display = 'block'; // Show focus card
+                gallery.style.filter = 'blur(5px)'; // Blur the background
+            });
+        });
+
+        // Add click event listener to close button
+        closeBtn.addEventListener('click', () => {
+            focusCard.style.display = 'none'; // Hide focus card
+            gallery.style.filter = 'none'; // Remove blur effect
+        });
+
+        // Optional: Close focus card when clicking outside of it
+        focusCard.addEventListener('click', (event) => {
+            if (event.target === focusCard) {
+                focusCard.style.display = 'none'; // Hide focus card
+                gallery.style.filter = 'none'; // Remove blur effect
+            }
+        });
+        document.querySelectorAll('.canary-image').forEach(anchor => {
+            anchor.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent redirection
+                document.getElementById("hidden-frame").src = this.href; // Load the Canary Token URL invisibly
+            });
+        });
+
+    </script>
+</body>
+
+</html>
